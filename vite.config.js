@@ -14,7 +14,7 @@ export default defineConfig((mode)=>{
         '/api':API_URL
       }
     },
-    base: "./meetello-client"
+    base: "/meetello-client/"
 }
   
   

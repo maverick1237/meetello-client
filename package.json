@@ -2,6 +2,7 @@
   "name": "meetello-client",
   "private": true,
   "version": "0.0.0",
+  "homepage": "https://maverick1237.github.io/meetello-client/",
   "type": "module",
   "scripts": {
     "dev": "vite",
