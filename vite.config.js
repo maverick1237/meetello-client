@@ -6,7 +6,7 @@ export default defineConfig((mode)=>{
 
   // eslint-disable-next-line no-undef
   //const env = loadEnv(mode, process.cwd());
-  const API_URL = process.env.NODE_ENV === 'production' ?'https://165.22.214.252:8000' : 'https://localhost:8000';
+  const API_URL = process.env.NODE_ENV === 'production' ?'https://165.22.214.252:8000' : 'http://localhost:8000';
   return{
     plugins: [react()],
     server:{
