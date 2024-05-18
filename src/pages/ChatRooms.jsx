@@ -18,9 +18,12 @@ function ChatRooms() {
   const {userData,isLoggedIn} = useSelector(state => state.auth); 
 
 
+
+
   const dispatch = useDispatch();
   const handleOpen = () => {
     console.log('Create Room modal open');
+   
     setIsModalOpen(true)
   }
   const handleClose = () => {
@@ -30,10 +33,13 @@ function ChatRooms() {
   }
   const handleFormSubmit = (data) => {
     data["roomId"] = Math.floor(Math.random() * 10000);
+    data["adminId"] = userData.userId;
     console.log(data);
+
     dispatch(createRoom({
       ...data,
-      roomType:'chat'
+      roomType:'chat',
+      
     }))
     handleClose();
   }

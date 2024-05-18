@@ -25,6 +25,7 @@ const Auth = () => {
              const response = await authService.login(data);
                 console.log(response);
                 data['username']= response.data.username;
+                data['userId'] = response.data['userId'];
                 dispatch(login(data));
                 dispatch(initRooms());
                 navigate('/home');
