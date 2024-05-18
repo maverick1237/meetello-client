@@ -1,7 +1,7 @@
 import axios from "axios";
 
 
-const API_URL = process.env.NODE_ENV === 'production' ? 'https://app.meetello.live:8000/api' : '/api';
+const API_URL = process.env.NODE_ENV === 'production' ? 'https://api.meetello.live:8000/api' : '/api';
 
 export class AuthService {
 
