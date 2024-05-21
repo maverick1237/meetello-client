@@ -6,7 +6,7 @@ const API_URL = process.env.NODE_ENV === 'production' ? 'https://api.meetello.li
 export class AuthService {
 
 
-    //signup function
+    
     async signup(data){
         try{
             const response = await axios.post(`${API_URL}/users/auth`, data);

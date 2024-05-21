@@ -1,12 +1,13 @@
 /* eslint-disable no-unused-vars */
-import React from 'react'
+import React, { useEffect, useMemo } from 'react'
 import HeadTile from '../components/HeadTile'
 import EmptyRooms from '../components/EmptyRooms'
 import { Modal } from '@mui/material'
-import { useForm } from 'react-hook-form'
+import { set, useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
-import { createRoom } from '../store/roomSlice'
+import { createRoom, initRooms } from '../store/roomSlice'
 import ContentCard from '../components/ContentCard'
+import roomService from '../service/rooms'
 
 function ChatRooms() {
 
@@ -16,6 +17,7 @@ function ChatRooms() {
 
   const {roomsData} = useSelector(state => state.room);
   const {userData,isLoggedIn} = useSelector(state => state.auth); 
+  const [createdRoom , setCreatedRoom] = React.useState({})
 
 
 
@@ -23,7 +25,6 @@ function ChatRooms() {
   const dispatch = useDispatch();
   const handleOpen = () => {
     console.log('Create Room modal open');
-   
     setIsModalOpen(true)
   }
   const handleClose = () => {
@@ -31,19 +32,21 @@ function ChatRooms() {
     reset()
     setIsModalOpen(false)
   }
-  const handleFormSubmit = (data) => {
-    data["roomId"] = Math.floor(Math.random() * 10000);
-    data["adminId"] = userData.userId;
+  const handleFormSubmit = async (data) => {
+    data['roomType'] = 'chat';
     console.log(data);
 
-    dispatch(createRoom({
-      ...data,
-      roomType:'chat',
-      
-    }))
+    const response = await roomService.createRoom(data);
+    response.data['roomType'] = 'chat';
+    console.log(response.data);
+    setCreatedRoom(response.data);
+    dispatch(createRoom(response.data));
     handleClose();
   }
 
+  useEffect(() => {
+     console.log('Fetching rooms data');
+  },[createdRoom, roomsData])
 
   return (
     <div className='flex flex-col w-full h-full'>

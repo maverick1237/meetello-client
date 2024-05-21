@@ -8,6 +8,7 @@ import { initRooms } from '../store/roomSlice';
 import authService from '../service/auth';
 
 import { useState } from 'react';
+import roomService from '../service/rooms';
 
 
 const Auth = () => {
@@ -23,11 +24,13 @@ const Auth = () => {
              console.log(data);
              console.log(process.env.NODE_ENV);
              const response = await authService.login(data);
+             const roomData = await roomService.getAllRooms();
                 console.log(response);
                 data['username']= response.data.username;
                 data['userId'] = response.data['userId'];
                 dispatch(login(data));
-                dispatch(initRooms());
+                dispatch(initRooms(roomData.data));
+                localStorage.setItem('jwt', response.data.token);
                 navigate('/home');
                 reset();
 
@@ -40,13 +43,16 @@ const Auth = () => {
     }
 
     const handleSignup = async (data) => {
+        
         if(data){
             console.log(data);
             try {
                 const response = await authService.signup(data);
+                const roomsData = await roomService.getAllRooms();
                 console.log(response);
                 dispatch(login(data));
-                dispatch(initRooms())
+                dispatch(initRooms(roomsData.data));
+                localStorage.setItem('jwt', response.data.token);
                 navigate('/home')
                 reset();
                 return response;

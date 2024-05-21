@@ -10,8 +10,8 @@ const roomSlice = createSlice({
     name: 'rooms',
     initialState,
     reducers: {
-        initRooms: (state) => {
-            state.roomsData = [];
+        initRooms: (state ,action) => {
+            state.roomsData = action.payload;
             state.isLoggedIn = true;
         },
         clearRooms:(state)=>{

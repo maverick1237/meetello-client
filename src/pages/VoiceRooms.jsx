@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React from 'react'
+import React ,{useEffect} from 'react'
 import HeadTile from '../components/HeadTile'
 import EmptyRooms from '../components/EmptyRooms'
 import { Modal } from '@mui/material'
@@ -7,16 +7,21 @@ import { useForm } from 'react-hook-form'
 import { useDispatch , useSelector } from 'react-redux'
 import { createRoom } from '../store/roomSlice'
 import ContentCard from '../components/ContentCard'
-
+import roomService from '../service/rooms';
 function VoiceRooms() {
 
   const[ isModalOpen, setIsModalOpen] = React.useState(false)
   
   const { register, handleSubmit , reset , formState :{errors}} = useForm()
-  const {userData,isLoggedIn} = useSelector(state => state.auth)
-  const {roomsData} = useSelector(state => state.room)
-  const dispatch = useDispatch();
 
+  const {roomsData} = useSelector(state => state.room);
+  const {userData,isLoggedIn} = useSelector(state => state.auth); 
+  const [createdRoom , setCreatedRoom] = React.useState({})
+
+
+
+
+  const dispatch = useDispatch();
   const handleOpen = () => {
     console.log('Create Room modal open');
     setIsModalOpen(true)
@@ -26,15 +31,21 @@ function VoiceRooms() {
     reset()
     setIsModalOpen(false)
   }
-  const handleFormSubmit = (roomsData) => {
-    console.log(roomsData);
-    roomsData["roomId"] = Math.floor(Math.random() * 10000);
-    roomsData["roomType"] = 'voice';
-    dispatch(createRoom(
-      roomsData,
-      ))
+  const handleFormSubmit = async (data) => {
+    data['roomType'] = 'voice';
+    console.log(data);
+
+    const response = await roomService.createRoom(data);
+    response.data['roomType'] = 'voice';
+    console.log(response.data);
+    setCreatedRoom(response.data);
+    dispatch(createRoom(response.data));
     handleClose();
   }
+
+  useEffect(() => {
+     console.log('Fetching rooms data');
+  },[createdRoom, roomsData])
 
 
   return (

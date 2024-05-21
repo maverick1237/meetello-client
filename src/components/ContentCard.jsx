@@ -1,16 +1,18 @@
 /* eslint-disable react/prop-types */
 
-import { Avatar, Button, Card, CardActionArea, CardActions, CardContent, CardHeader, CardMedia, IconButton, Menu, MenuItem, Modal, Paper, Popper, Typography } from '@mui/material'
+import { Avatar, Button, Card,  CardActions, CardContent, CardHeader, CardMedia, IconButton, Menu, MenuItem, Modal, Paper, Popper, Typography } from '@mui/material'
 import React from 'react'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
 import { useDispatch } from 'react-redux';
 import { deleteRoom } from '../store/roomSlice';
+import roomService from '../service/rooms';
 
 
 function ContentCard({roomData , userData}) {
 
     const initials = userData.username.substring(0,2).toUpperCase();
-    const {roomName ,roomDescription ,roomId} = roomData;
+  
+    //const {roomsData} = useSelector(state => state.room);
     const [anchorEl, setAnchorEl] = React.useState(null); 
     const[open,setOpen] = React.useState(false);
     const [isModalOpen, setIsModalOpen] = React.useState(false);
@@ -30,6 +32,7 @@ function ContentCard({roomData , userData}) {
 
     const handleIconButtonDelete = () =>{
             console.log('Delete Room is clicked');
+            console.log(roomData.roomId);
             setIsModalOpen(true);
             console.log('Create Room modal open');
             setOpen(false);
@@ -42,12 +45,21 @@ function ContentCard({roomData , userData}) {
 
     const handleDeleteRoom = ()=>{
         console.log('Delete Room is clicked');
+        console.log(roomData.roomId);
+        roomService.deleteRoom(roomData.roomId);
         dispatch(deleteRoom(
-            roomId
+            roomData.roomId
         ))
         setIsModalOpen(false);
         handleClose();
     }
+
+     const handleJoinClick = ()=>{
+        console.log('Join Room is clicked');
+        console.log(roomData.roomId);
+        const response = roomService.joinRoom(roomData.roomId);
+        console.log(response);
+     }  
 
 
   return (
@@ -62,13 +74,13 @@ function ContentCard({roomData , userData}) {
                 <MoreVertIcon />
             </IconButton>
         }
-        title={roomName}
+        title={roomData.roomName}
 
         />
         <CardMedia 
         component="img"
         height={194}
-        image='/public/podcastbg.webp'
+        image='/podcastbg.webp'
         alt='RoomBackgroundImage'
         />
         <CardContent 
@@ -81,18 +93,18 @@ function ContentCard({roomData , userData}) {
                 overflow: 'hidden',
                 textOverflow: 'ellipsis',
 }}>
-          {roomDescription}
+          {roomData.roomDescription}
         </Typography>
       </CardContent>
         
       <CardActions>
-        <Button size="small" color="primary">
+        <Button size="small" color="primary" onClick={handleJoinClick}>
           Join Room
         </Button>
       </CardActions>      
         
     <Popper open={open} anchorEl={anchorEl} placement='right-start' >
-      <Paper>
+      <Paper className={`${userData.userId===roomData.roomAdmin.userId? '' : 'hidden'}`}>
         <MenuItem onClick={handleIconButtonDelete}  > <h1 className='text-pink-500'>Delete</h1></MenuItem>
       </Paper>
     </Popper> 
@@ -110,7 +122,6 @@ function ContentCard({roomData , userData}) {
         <Button onClick={handleDeleteRoom} variant='contained' color='error'>Delete</Button>
         <Button onClick={handleClose} variant='contained' color='primary'>Cancel</Button> 
         </div>
-       
     </div>
 </Modal>
     </Card>
