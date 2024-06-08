@@ -8,6 +8,7 @@ import { useDispatch , useSelector } from 'react-redux'
 import { createRoom } from '../store/roomSlice'
 import ContentCard from '../components/ContentCard'
 import roomService from '../service/rooms';
+import FeatureNotPresentYet from '../components/FeatureNotPresentYet'
 function VoiceRooms() {
 
   const[ isModalOpen, setIsModalOpen] = React.useState(false)
@@ -52,7 +53,8 @@ function VoiceRooms() {
     <div className='flex flex-col w-full h-full'>
     <div>
 
-    <HeadTile title={"Voice Rooms"} onClick={handleOpen} />
+    { // <HeadTile title={"Voice Rooms"} onClick={handleOpen} /> 
+    }
     <Modal
 open={isModalOpen}
 onClose={handleClose}
@@ -100,8 +102,8 @@ className="flex items-center justify-center"
            )
          }
        }) :
-       <div className='h-[100%] w-[100%]  mx-[50%]'>
-         <EmptyRooms />
+       <div className='h-screen w-screen mx-[70%] my-[50%]'>
+         <FeatureNotPresentYet />
        </div>}
    </div> 
   </div>

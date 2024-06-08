@@ -15,6 +15,16 @@ export class RoomService{
         }
     }
 
+    async getRoom(roomId){
+        try {
+            const response = axios.get(`${API_URL}/rooms/${roomId}`);
+            
+            return response;
+        }catch(error){
+            console.log(error);
+        }
+    }
+
     async createRoom(data){
         try {
             const response = axios.post(`${API_URL}/rooms`, data,{headers:{

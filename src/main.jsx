@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
@@ -17,6 +18,8 @@ import { Provider } from 'react-redux'
 import { persistor, store } from './store/store.js'
 import { PersistGate } from 'redux-persist/integration/react'
 import ProtectedRoutes from './routes/ProtectedRoutes.jsx'
+import VideoCall from './components/VideoCall.jsx'
+import ChatComponent from './components/ChatComponent.jsx'
 
 
 const router = createBrowserRouter(
@@ -33,6 +36,8 @@ const router = createBrowserRouter(
           <Route path='/voice-rooms' element={<VoiceRooms/>}/>
           <Route path='/settings' element={<Settings />}/>
           </Route>
+          <Route path='/video/:userId/:roomId' element={<VideoCall />}/>
+          <Route path='/chat/:userId/:roomId' element={<ChatComponent />}/>
       </Route>
      
     </Route>  

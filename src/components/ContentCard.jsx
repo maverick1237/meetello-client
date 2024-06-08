@@ -6,6 +6,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert'
 import { useDispatch } from 'react-redux';
 import { deleteRoom } from '../store/roomSlice';
 import roomService from '../service/rooms';
+import { useNavigate } from 'react-router-dom';
 
 
 function ContentCard({roomData , userData}) {
@@ -17,6 +18,7 @@ function ContentCard({roomData , userData}) {
     const[open,setOpen] = React.useState(false);
     const [isModalOpen, setIsModalOpen] = React.useState(false);
     const dispatch = useDispatch();
+    const navigate =useNavigate();
 
 
 
@@ -54,11 +56,21 @@ function ContentCard({roomData , userData}) {
         handleClose();
     }
 
-     const handleJoinClick = ()=>{
+     const handleJoinClick = async ()=>{
         console.log('Join Room is clicked');
         console.log(roomData.roomId);
-        const response = roomService.joinRoom(roomData.roomId);
+        
+        const response = await roomService.joinRoom(roomData.roomId);
         console.log(response);
+
+        if(response.status === 200){
+            if(response.data.roomType === 'video'){
+                navigate(`/video/${userData.userId}/${roomData.roomId}`);
+            }
+            if(response.data.roomType==='chat'){
+                navigate(`/chat/${userData.userId}/${roomData.roomId}`);
+            }
+        }
      }  
 
 
