@@ -49,7 +49,7 @@ function ChatRooms() {
   },[createdRoom, roomsData])
 
   return (
-    <div className='flex flex-col w-full h-full'>
+    <div className='flex flex-col w-full h-full overflow-y-auto no-scrollbar'>
     <div>
 
     <HeadTile title={"Messaging Rooms"} onClick={handleOpen} />
