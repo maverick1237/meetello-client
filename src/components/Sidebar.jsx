@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Menu, MenuItem, Paper, Popper } from '@mui/material';
 import { logout } from '../store/authSlice';
 import { clearRooms } from '../store/roomSlice';
+import { Man2Rounded } from '@mui/icons-material';
 
 function Sidebar() {
     const [user,setUser] = useState('${notdefined}')
@@ -23,8 +24,8 @@ function Sidebar() {
         {title:"Home",icon:faHome, pageName:"/home"},
         {title:"Video Rooms",icon:faVideo ,gap:true , pageName:"video-rooms"},
         {title:"Messaging Rooms" , icon:faMessage , pageName:"chat-rooms"},
-        {title:"Voice Rooms" ,icon: faRecordVinyl, pageName: "voice-rooms" },
-        {title:"Settings" ,icon:faGear,gap:true , pageName: "settings" },
+        //{title:"Voice Rooms" ,icon: faRecordVinyl, pageName: "voice-rooms" },
+        //{title:"Settings" ,icon:faGear,gap:true , pageName: "settings" },
         
     ]
 
@@ -70,8 +71,10 @@ return (
             </ul>
             <ul>
                 <li className={`flex gap-x-4 items-center cursor-pointer mx-2 p-3 hover:bg-[rgba(255,255,255,0.17)] rounded-lg mt-auto`} onClick={handleClick}>
-                    <div className="rounded-full overflow-hidden w-8 h-8">
-                        <img src="/public/podcastbg.webp" alt="User" className="w-full h-full object-cover" />
+                    <div className="rounded-full overflow-hidden border border-white">
+                        <Man2Rounded className="w-full h-full object-cover" />
+                        {//<img src="/public/podcastbg.webp" alt="User" className="w-full h-full object-cover" />
+                        }
                     </div>
                     <h1 className={`${!isSideBarOpen && 'scale-0'} duration-200 ${isSideBarOpen ? 'text-lg' : 'text-[0px]'}`}>{user}</h1>
                 </li>   
