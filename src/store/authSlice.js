@@ -4,6 +4,7 @@ const initialState = {
     isLoggedIn: false,
     userData:null,
     roomsData: [],
+    activated: false,
 };
 
 const authSlice = createSlice({

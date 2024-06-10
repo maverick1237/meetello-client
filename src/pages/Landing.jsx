@@ -20,7 +20,7 @@ function Feature({ icon, title, description }) {
 
 function Landing() {
   return (
-    <div className='bg-gradient-to-r from-[#333399] to-[#FF00CC] h-full min-h-screen w-[100%] absolute '>
+    <div className='bg-gradient-to-r from-[#333399] to-[#FF00CC]  md:h-screen  w-[100%]  '>
       <div className="overflow-hidden main-container">
       <img src='../../public/podcastbg.webp' className=" bg-no-repeat w-[100%] max-h-screen h-screen absolute opacity-5" />
       
@@ -28,7 +28,7 @@ function Landing() {
       heading-container-div ">
       <div className="max-w-[80%] 
       sm:max-w-[45%] 
-      ml-[30%] mt-16 sm:mt-[5%]
+      ml-[10%] mt-16 sm:mt-[5%]
       sm:ml-12
       sm:mr-52
       items-center
@@ -70,7 +70,7 @@ function Landing() {
       </div>
       </div>
       
-      <div className="sm:flex justify-center items-center mt-16 ml-[15%] sm:ml-[0]">
+      <div className="sm:flex justify-center items-center mt-16 ml-[15%] sm:ml-[0] pb-8">
       <div className="md:max-w-[55%] md:ml-12">
         <NormalReveal animationDelay={.90}>
              <div className="feature-container">

@@ -20,6 +20,7 @@ import { PersistGate } from 'redux-persist/integration/react'
 import ProtectedRoutes from './routes/ProtectedRoutes.jsx'
 import VideoCall from './components/VideoCall.jsx'
 import ChatComponent from './components/ChatComponent.jsx'
+import Activation from './components/Activation.jsx'
 
 
 const router = createBrowserRouter(
@@ -27,6 +28,7 @@ const router = createBrowserRouter(
     <Route>
       <Route path='/' element={<Landing />} />
       <Route path='/auth' element={<Auth/>} />
+      <Route path='/activate/:token' element={<Activation/>} />
       <Route element={<ProtectedRoutes/>}>
 
       <Route element={<Layout />} >

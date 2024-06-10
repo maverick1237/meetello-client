@@ -2,7 +2,7 @@
 import React, { useEffect, useMemo } from 'react'
 import HeadTile from '../components/HeadTile'
 import EmptyRooms from '../components/EmptyRooms'
-import { Modal } from '@mui/material'
+import { Modal, useMediaQuery } from '@mui/material'
 import { set, useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import { createRoom, initRooms } from '../store/roomSlice'
@@ -46,7 +46,11 @@ function ChatRooms() {
 
   useEffect(() => {
      console.log('Fetching rooms data');
+     initRooms();
   },[createdRoom, roomsData])
+  
+
+  const isSmallScreen = useMediaQuery('(max-width: 600px)');
 
   return (
     <div className='flex flex-col w-full h-full overflow-y-auto no-scrollbar'>
@@ -60,7 +64,7 @@ aria-labelledby='modal-modal-title'
 aria-describedby='modal-modal-description'
 className="flex items-center justify-center" 
 >
-<div className='bg-white  rounded-2xl shadow-xl w-[30%]'>
+<div className={`bg-white  rounded-2xl shadow-xl  ${isSmallScreen ? 'w-[90%]' : 'w-[30%]'}`}>
 <form onSubmit={handleSubmit(handleFormSubmit)} className="p-5">
 
 <div className='flex flex-col w-[100%] h-[100%] justify-between'>
@@ -87,9 +91,9 @@ className="flex items-center justify-center"
 
 </Modal>
     </div>
-  <div className='flex flex-col w-[100%] h-[100%]  ml-5'>
+  <div className='flex flex-col w-[100%] h-[100%] ml-5'>
    
-    <div className={`grid grid-cols-3 gap-4 room-contianer-div`}>
+    <div className={`grid grid-cols-1 md:grid-cols-3 gap-4 room-contianer-div`}>
     {roomsData.filter(room=> room.roomType==='chat').length > 0 ? 
         roomsData.map((room,index) => {
           if(room.roomType === 'chat'){

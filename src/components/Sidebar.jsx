@@ -51,7 +51,7 @@ function Sidebar() {
     
 
 return (
-    <div className={`${isSideBarOpen ? 'w-44' : 'w-20'} duration-300 bg-blue-900 border-r-2 border-white text-2xl text-white  min-h-[calc(100vh-4rem)] pt-5 relative flex flex-col justify-between`}>
+    <div className={`${isSideBarOpen ? 'w-44' : 'w-20'} duration-300 bg-blue-900 border-r-2 border-white text-2xl text-white  min-h-[calc(100vh-4rem)] pt-5 relative md:flex md:flex-col justify-between hidden`}>
             
             <FontAwesomeIcon onClick={()=> setIsSideBarOpen(!isSideBarOpen)} icon={isSideBarOpen ? faArrowLeft : faArrowRight} className={` duration-300 absolute cursor-pointer -right-3 top-2 bg-white  text-black rounded-full border-2 p-1 text-lg`} />
             <ul className='pt-2'>

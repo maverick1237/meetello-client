@@ -20,23 +20,23 @@ function Home() {
   }, [setUser, userData, isLoggedIn, roomsData]);
   return (
 
-    <div className='mx-8 overflow-y-auto no-scrollbar'>
-      <div className='mt-[10vh]'>
-        <h1 className='text-2xl text-black font-semibold text-pretty leading-tight text-justify'>Welcome back  , {user} !
+    <div className='mx-3 md:mx-8 overflow-y-auto no-scrollbar'>
+      <div className='mt-[2vh] md:mt-[10vh]'>
+        <h1 className='text-2xl text-black font-semibold text-pretty leading-tight'>Welcome back,  {user} !
         </h1>
        
       </div>
       <Divider 
       width='30%'
       className='mt-2' color='black' />
-      <div className='flex items-center '>
-        <TodoContainer   className='mr-[6vw] text-green-800 border-green-800 bg-green-400' >
+      <div className=' grid grid-flow-row md:flex items-center '>
+        <TodoContainer   className=' md:mr-[6vw] text-green-800 border-green-800 bg-green-400' >
         <Todos  />
         </TodoContainer>
        
         <Divider orientation='vertical' flexItem />
        
-        <div className='ml-10 grid grid-cols-2 grid-rows-2 gap-2'>
+        <div className='mt-3  md:mt-0 md:ml-10 grid md:grid-cols-2 grid-rows-2 gap-2'>
         <Container  type='video'  icon={faVideoCamera} className="min-w-[100%] 
          p-5 rounded-lg
           text-blue-600 bg-blue-300 border-blue-600"  roomsData={roomsData}/>
@@ -56,7 +56,7 @@ function Home() {
       <Divider width='100%' color="black"  />
       </div>
       <h1 className='mb-2 text-2xl text-slate-800'> Something you must know!</h1>
-      <div className='grid grid-flow-col grid-cols-2 grid-rows-2  gap-2 mb-8'>
+      <div className='grid  grid-cols-1 grid-rows-1 md:grid-cols-2 md:grid-rows-2  gap-2 mb-8'>
         <TodoContainer className='text-green-950 bg-green-300 border-green-950' >
         <h1>
         Our Video Room feature allows for real-time, face-to-face communication. Users can join public video rooms for group discussions or create private video rooms for more personal interactions. This feature supports high-quality video and audio, screen sharing, and a variety of other tools to enhance your communication experience. With an intuitive interface and powerful functionality, our Video Room feature brings a new level of interaction to online communication.

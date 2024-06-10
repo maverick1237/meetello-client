@@ -2,10 +2,10 @@
 import React ,{useEffect} from 'react'
 import HeadTile from '../components/HeadTile'
 import EmptyRooms from '../components/EmptyRooms'
-import { Modal } from '@mui/material'
+import { Modal, useMediaQuery } from '@mui/material'
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
-import { createRoom } from '../store/roomSlice'
+import { createRoom, initRooms } from '../store/roomSlice'
 import ContentCard from '../components/ContentCard'
 
 import roomService from '../service/rooms'
@@ -47,8 +47,11 @@ function VideoRooms() {
 
   useEffect(() => {
      console.log('Fetching rooms data');
+     initRooms();
   },[createdRoom, roomsData])
 
+
+  const isSmallScreen = useMediaQuery('(max-width: 600px)');
   return (
     <div className='flex flex-col w-full h-full overflow-y-auto no-scrollbar'>
       <div>
@@ -61,7 +64,7 @@ function VideoRooms() {
   aria-describedby='modal-modal-description'
   className="flex items-center justify-center" 
 >
-  <div className='bg-white  rounded-2xl shadow-xl w-[30%]'>
+  <div className={`bg-white  rounded-2xl shadow-xl  ${isSmallScreen ? 'w-[90%]' : 'w-[30%]'}`}>
   <form onSubmit={handleSubmit(handleFormSubmit)} className="p-5">
   
   <div className='flex flex-col w-[100%] h-[100%] justify-between'>
@@ -88,9 +91,9 @@ function VideoRooms() {
  
 </Modal>
       </div>
-      <div className='flex flex-col w-[100%] h-[100%]  ml-5'>
+      <div className='flex flex-col w-[100%] h-[100%]  ml-5 mb-24'>
    
-   <div className={`grid grid-cols-3 gap-4 room-contianer-div`}>
+   <div className={`grid grid-cols-1 md:grid-cols-3 gap-4 room-contianer-div`}>
    {roomsData.filter(room=> room.roomType==='video').length > 0 ? 
        roomsData.map((room,index) => {
          if(room.roomType === 'video'){
@@ -101,7 +104,7 @@ function VideoRooms() {
            )
          }
        }) :
-       <div className='h-[100%] w-[100%]  mx-[40%]'>
+       <div className='flex flex-col items-center justify-center'>
          <EmptyRooms />
        </div>}
    </div> 

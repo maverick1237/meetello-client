@@ -76,7 +76,7 @@ function ContentCard({roomData , userData}) {
 
   return (
     <>
-      <Card sx={{ maxWidth: 345  , maxHeight: 500}}>
+      <Card sx={{ maxWidth: 400  , maxHeight: 500}}>
         <CardHeader
         avatar={
             <Avatar sx={{ bgcolor: "red" }} aria-label="name-avatar">{initials}</Avatar>
