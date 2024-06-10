@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = process.env.NODE_ENV === 'production' ? 'https://token.meetello.live/api' : 'http://localhost:3000/api/token';
+const API_URL = process.env.NODE_ENV === 'production' ? 'https://token.meetello.live/api/token' : 'http://localhost:3000/api/token';
 
 class TokenService {
   async getToken(userId) {
